@@ -1,0 +1,77 @@
+#include <iostream>
+using namespace std;
+
+class Guesser {
+public:
+    int guesserNum;
+    
+    int takeNumberGuesser() {
+        cout << "Guesser guesses the Number: ";
+        cin >> guesserNum;
+        return guesserNum;
+    }
+};
+
+class Player {
+public:
+    int playerNum;
+    
+    int takeNumberPlayer() {
+        cout << "Player guesses the Number: ";
+        cin >> playerNum;
+        return playerNum;
+    }
+};
+
+class Umpire {
+public:
+    int numFromGuesser;
+    int numFromPlayer1;
+    int numFromPlayer2;
+    int numFromPlayer3;
+
+    void collectFromGuesser() {
+        Guesser g;
+        numFromGuesser = g.takeNumberGuesser();
+    }
+    
+    void collectFromPlayers() {
+        Player p1, p2, p3;
+        numFromPlayer1 = p1.takeNumberPlayer();
+        numFromPlayer2 = p2.takeNumberPlayer();
+        numFromPlayer3 = p3.takeNumberPlayer();
+    }
+
+    void compare() {
+        if (numFromPlayer1 == numFromGuesser) {
+            if (numFromPlayer2 == numFromGuesser && numFromPlayer3 == numFromGuesser) {
+                cout << "All Players Won The Game." << endl;
+            } else if (numFromPlayer2 == numFromGuesser) {
+                cout << "Only Player1 and Player2 Won The Game." << endl;
+            } else if (numFromPlayer3 == numFromGuesser) {
+                cout << "Only Player1 and Player3 Won The Game." << endl;
+            } else {
+                cout << "Only Player1 Won The Game." << endl;
+            }
+        } else if (numFromPlayer2 == numFromGuesser) {
+            if (numFromPlayer3 == numFromGuesser) {
+                cout << "Only Player2 and Player3 Won The Game." << endl;
+            } else {
+                cout << "Only Player2 Won The Game." << endl;
+            }
+        } else if (numFromPlayer3 == numFromGuesser) {
+            cout << "Only Player3 Won The Game." << endl;
+        } else {
+            cout << "No Player Won The Game." << endl;
+        }
+    }
+};
+
+int main() {
+    Umpire u;
+    u.collectFromGuesser();
+    u.collectFromPlayers();
+    u.compare();
+    
+    return 0;
+}
